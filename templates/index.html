@@ -47,24 +47,16 @@
                 <nav>
                   <ul className="flex space-x-6">
                     <li>
-                      <a href="/" className="text-green-700 hover:text-green-500">
-                        Home
-                      </a>
+                      <a href="/" className="text-green-700 hover:text-green-500">Home</a>
                     </li>
                     <li>
-                      <a href="/crop_plan" className="text-green-700 hover:text-green-500">
-                        Crop Plan
-                      </a>
+                      <a href="/crop_plan" className="text-green-700 hover:text-green-500">Crop Plan</a>
                     </li>
                     <li>
-                      <a href="/weather" className="text-green-700 hover:text-green-500">
-                        Weather
-                      </a>
+                      <a href="/weather" className="text-green-700 hover:text-green-500">Weather</a>
                     </li>
                     <li>
-                      <a href="/market" className="text-green-700 hover:text-green-500">
-                        Market View
-                      </a>
+                      <a href="/market" className="text-green-700 hover:text-green-500">Market View</a>
                     </li>
                   </ul>
                 </nav>
@@ -81,21 +73,33 @@
             >
               <div className="container mx-auto px-4 py-20 text-center">
                 <div className="bg-transparent bg-opacity-40 p-8 rounded-lg shadow-lg inline-block">
-                  <h1 className="text-4xl font-bold text-green-800 mb-4">
-                    Leveraging Earth Observation Data
-                  </h1>
-                  <p className="text-xl text-green-700 mb-8">
-                    for Informed Agricultural Decision-Making
-                  </p>
+                  <h1 className="text-4xl font-bold text-green-800 mb-4">Leveraging Earth Observation Data</h1>
+                  <p className="text-xl text-green-700 mb-8">for Informed Agricultural Decision-Making</p>
                   <blockquote className="text-2xl italic text-gray-700">
-                    "Farming looks mighty easy when your plow is a pencil and you're a thousand
-                    miles from the corn field."
-                    <footer className="text-right text-sm mt-2">
-                      - Dwight D. Eisenhower
-                    </footer>
+                    "Farming looks mighty easy when your plow is a pencil and you're a thousand miles from the corn field."
+                    <footer className="text-right text-sm mt-2">- Dwight D. Eisenhower</footer>
                   </blockquote>
                 </div>
               </div>
+
+              {/* Additional Content Section */}
+              <section className="container mx-auto px-4 py-16">
+                <h2 className="text-3xl font-bold text-center text-green-800 mb-8">Our Services</h2>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                  <div className="bg-white rounded-lg shadow-md p-4">
+                    <h3 className="text-xl font-semibold text-green-700">Data Analytics</h3>
+                    <p>We provide in-depth data analysis to help farmers make informed decisions.</p>
+                  </div>
+                  <div className="bg-white rounded-lg shadow-md p-4">
+                    <h3 className="text-xl font-semibold text-green-700">Weather Forecasting</h3>
+                    <p>Get accurate weather predictions to plan your farming activities.</p>
+                  </div>
+                  <div className="bg-white rounded-lg shadow-md p-4">
+                    <h3 className="text-xl font-semibold text-green-700">Market Insights</h3>
+                    <p>Stay updated with the latest market trends and prices for better sales strategies.</p>
+                  </div>
+                </div>
+              </section>
             </main>
 
             {/* Footer */}
@@ -105,33 +109,22 @@
                   <div className="w-full md:w-1/2 mb-4 md:mb-0">
                     <h3 className="text-xl font-semibold mb-2">About Us</h3>
                     <p className="text-1xl">
-                      AgriTech is an innovative application designed to bridge the gap between
-                      agriculture and technology. It aims to empower farmers, agribusinesses, and
-                      consumers by providing valuable insights, tools, and services related to
-                      agriculture.
+                      AgriTech is an innovative application designed to bridge the gap between agriculture and technology. It aims to empower farmers, agribusinesses, and consumers by providing valuable insights, tools, and services related to agriculture.
                     </p>
                   </div>
                   <div className="w-full md:w-1/2 flex justify-end space-x-4">
-                    <Button variant="ghost" size="icon" aria-label="Instagram">
-                      <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none">
-                        <path d="..." fill="currentColor" />
-                      </svg>
-                    </Button>
-                    <Button variant="ghost" size="icon" aria-label="Facebook">
-                      <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none">
-                        <path d="..." fill="currentColor" />
-                      </svg>
-                    </Button>
-                    <Button variant="ghost" size="icon" aria-label="Twitter">
-                      <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none">
-                        <path d="..." fill="currentColor" />
-                      </svg>
-                    </Button>
-                    <Button variant="ghost" size="icon" aria-label="Email">
-                      <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none">
-                        <path d="..." fill="currentColor" />
-                      </svg>
-                    </Button>
+                    <a href="https://www.instagram.com/agritech.in/" target="_blank" rel="noopener noreferrer">
+                      <img className="h-8 w-8" src="https://d3sxshmncs10te.cloudfront.net/icon/free/svg/721958.svg?token=eyJhbGciOiJoczI1NiIsImtpZCI6ImRlZmF1bHQifQ__.eyJpc3MiOiJkM3N4c2htbmNzMTB0ZS5jbG91ZGZyb250Lm5ldCIsImV4cCI6MTcyODQ3OTg0NCwicSI6bnVsbCwiaWF0IjoxNzI4MjIwNjQ0fQ__.604748fe826e32d9bb0219e2201576cc8080c343964cf7135d79e565e63a7ed8" alt="Instagram" />
+                    </a>
+                    <a href="https://www.facebook.com/agritech.in/" target="_blank" rel="noopener noreferrer">
+                      <img className="h-8 w-8" src="data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20193%20193%22%3E%3Cg%20data-name%3D%22facebook%20circle%22%20transform%3D%22translate(-136%20-677)%22%3E%3Crect%20width%3D%22193%22%20height%3D%22193%22%20fill%3D%22%231778f2%22%20data-name%3D%22Rectangle%203167%22%20rx%3D%2296.5%22%20transform%3D%22translate(136%20677)%22%2F%3E%3Cpath%20fill%3D%22%23fdfdfd%22%20d%3D%22M240.195%20827.969v-51.655h17.339l2.6-20.131h-19.939V743.33c0-5.828%201.619-9.8%209.977-9.8h10.66v-18a142.87%20142.87%200%200%200-15.534-.792c-15.37%200-25.892%209.381-25.892%2026.61v14.835h-17.383v20.131h17.383v51.655h20.789Z%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E" alt="Facebook" />
+                    </a>
+                    <a href="https://twitter.com/agritech_in" target="_blank" rel="noopener noreferrer">
+                      <img className="h-8 w-8" src="data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20fill%3D%22%2303A9F4%22%20d%3D%22M16%203.539a6.839%206.839%200%200%201-1.89.518%203.262%203.262%200%200%200%201.443-1.813%206.555%206.555%200%200%201-2.08.794%203.28%203.28%200%200%200-5.674%202.243c0%20.26.022.51.076.748a9.284%209.284%200%200%201-6.761-3.431%203.285%203.285%200%200%200%201.008%204.384A3.24%203.24%200%200%201%20.64%206.578v.036a3.295%203.295%200%200%200%202.628%203.223%203.274%203.274%200%200%201-.86.108%202.9%202.9%200%200%201-.621-.056%203.311%203.311%200%200%200%203.065%202.285%206.59%206.59%200%200%201-4.067%201.399c-.269%200-.527-.012-.785-.045A9.234%209.234%200%200%200%205.032%2015c6.036%200%209.336-5%209.336-9.334%200-.145-.005-.285-.012-.424A6.544%206.544%200%200%200%2016%203.539z%22%2F%3E%3C%2Fsvg%3E" alt="Twitter" />
+                    </a>
+                    <a href="mailto:info@agritech.in" target="_blank" rel="noopener noreferrer">
+                      <img className="h-8 w-8" src="data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20data-name%3D%22Layer%202%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cpath%20d%3D%22M29.94%206.68a1%201%200%200%200-.09-.18.94.94%200%200%200-.05-.11%201.6%201.6%200%200%200-.31-.24l-.17-.06H2.94a1%201%200%200%200-.21%200l-.17.06a1%201%200%200%200-.15.1%201%201%200%200%200-.15.13.93.93%200%200%200-.05.11.79.79%200%200%200-.21.39A.93.93%200%200%200%202%207v18a1%201%200%200%200%201%201h26a1%201%200%200%200%201-1V7a.93.93%200%200%200%200-.12%201%201%200%200%200-.06-.2ZM26.06%208%2016%2015.74%205.94%208ZM28%2024H4V9l11.39%208.76a1%201%200%200%200%201.22%200L28%209Z%22%2F%3E%3C%2Fsvg%3E" alt="Email" />
+                    </a>
                   </div>
                 </div>
               </div>
