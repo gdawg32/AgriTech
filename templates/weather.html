@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather Information</title>
+
+    <!-- React and ReactDOM CDN -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+    <!-- Babel CDN to transpile JSX -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-green-100 min-h-screen">
+    <div id="root"></div>
+
+    <!-- React Component -->
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        const cropsData = [
+            { name: 'Wheat', minTemp: 10, maxTemp: 25, humidity: 'moderate' },
+            { name: 'Paddy', minTemp: 20, maxTemp: 37, humidity: 'high' },
+            { name: 'Onion', minTemp: 15, maxTemp: 30, humidity: 'low' },
+            { name: 'Corn', minTemp: 18, maxTemp: 35, humidity: 'moderate' },
+            { name: 'Tomato', minTemp: 15, maxTemp: 30, humidity: 'low' },
+            { name: 'Chilly', minTemp: 20, maxTemp: 32, humidity: 'moderate' },
+            { name: 'Potato', minTemp: 10, maxTemp: 25, humidity: 'low' },
+            { name: 'Brinjal', minTemp: 20, maxTemp: 35, humidity: 'high' },
+            { name: 'Carrot', minTemp: 15, maxTemp: 25, humidity: 'moderate' },
+            { name: 'Banana', minTemp: 15, maxTemp: 35, humidity: 'high' },
+            { name: 'Coconut', minTemp: 20, maxTemp: 35, humidity: 'high' },
+            { name: 'Mango', minTemp: 18, maxTemp: 35, humidity: 'moderate' },
+            { name: 'Cucumber', minTemp: 20, maxTemp: 30, humidity: 'low' },
+            { name: 'Pumpkin', minTemp: 18, maxTemp: 30, humidity: 'moderate' },
+            { name: 'Bitterguard', minTemp: 20, maxTemp: 30, humidity: 'moderate' },
+            { name: 'Pea', minTemp: 10, maxTemp: 25, humidity: 'low' },
+            { name: "Lady's Finger", minTemp: 20, maxTemp: 35, humidity: 'moderate' },
+        ];
+
+        const Navbar = () => {
+            return (
+                <header className="bg-white shadow-md">
+                    <div className="container mx-auto px-4 py-4 flex justify-between items-center">
+                        <div className="flex items-center space-x-2">
+                            <img src="https://i.pinimg.com/originals/02/ab/d1/02abd14caa0c152211d3e52c915808ac.png" alt="Leaves" width="40" height="40" />
+                            <span className="text-2xl font-bold text-green-700">AgriTech</span>
+                        </div>
+                        <nav>
+                            <ul className="flex space-x-6">
+                                <li>
+                                    <a href="/" className="text-green-700 hover:text-green-500">
+                                        Home
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/crop_plan" className="text-green-700 hover:text-green-500">
+                                        Crop Plan
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/weather" className="text-green-700 hover:text-green-500">
+                                        Weather
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/market" className="text-green-700 hover:text-green-500">
+                                        Market View
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </header>
+            );
+        };
+
+        function WeatherApp() {
+            const [districts, setDistricts] = useState([]);
+            const [selectedDistrict, setSelectedDistrict] = useState('');
+            const [weatherData, setWeatherData] = useState(null);
+            const [suitableCrops, setSuitableCrops] = useState([]);
+            const [loading, setLoading] = useState(false);
+
+            useEffect(() => {
+                // Fetch district data passed from Django
+                const districtElements = document.querySelectorAll('[data-district]');
+                const districtList = Array.from(districtElements).map(el => el.getAttribute('data-district'));
+                setDistricts(districtList);
+            }, []);
+
+            const fetchWeather = async (district) => {
+                setLoading(true);
+                try {
+                    const response = await fetch(`/get_weather_data/${district}`);
+                    const data = await response.json();
+                    setWeatherData(data);
+                    findSuitableCrops(data);
+                } catch (error) {
+                    console.error('Error fetching weather data:', error);
+                }
+                setLoading(false);
+            };
+
+            const findSuitableCrops = (weatherData) => {
+                const temp = weatherData.main.temp;
+                const humidity = weatherData.main.humidity;
+
+                // Convert humidity value to a qualitative descriptor
+                let humidityLevel;
+                if (humidity > 70) {
+                    humidityLevel = 'high';
+                } else if (humidity < 40) {
+                    humidityLevel = 'low';
+                } else {
+                    humidityLevel = 'moderate';
+                }
+
+                // Filter crops based on temperature and humidity
+                const filteredCrops = cropsData.filter(crop => 
+                    crop.minTemp <= temp && crop.maxTemp >= temp && crop.humidity === humidityLevel
+                );
+
+                setSuitableCrops(filteredCrops);
+            };
+
+            const handleDistrictChange = (e) => {
+                const district = e.target.value;
+                setSelectedDistrict(district);
+                if (district) fetchWeather(district);
+            };
+
+            return (
+                <div>
+                    <Navbar />
+                    <div className="container mx-auto py-10">
+                        <h1 className="text-3xl font-bold text-center text-blue-800 mb-8">Weather Information</h1>
+
+                        <div className="flex justify-center mb-6">
+                            <select
+                                className="w-1/2 p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                value={selectedDistrict}
+                                onChange={handleDistrictChange}
+                            >
+                                <option value="">Select District</option>
+                                {districts.map((district) => (
+                                    <option key={district} value={district}>
+                                        {district}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
+
+                        {loading && <p className="text-center text-gray-600">Loading...</p>}
+
+                        {weatherData && (
+                            <div className="bg-white shadow-lg rounded-lg p-6 mt-6 max-w-md mx-auto">
+                                <h2 className="text-xl font-bold text-blue-600">{weatherData.name}</h2>
+                                <p><strong>Temperature:</strong> {weatherData.main.temp} °C</p>
+                                <p><strong>Weather:</strong> {weatherData.weather[0].description}</p>
+                                <p><strong>Humidity:</strong> {weatherData.main.humidity}%</p>
+                                <p><strong>Wind Speed:</strong> {weatherData.wind.speed} m/s</p>
+                            </div>
+                        )}
+
+                        {suitableCrops.length > 0 && (
+                            <div className="bg-green-50 shadow-lg rounded-lg p-6 mt-6 max-w-md mx-auto">
+                                <h2 className="text-xl font-bold text-green-600">Suitable Crops</h2>
+                                <ul className="list-disc list-inside">
+                                    {suitableCrops.map(crop => (
+                                        <li key={crop.name} className="text-gray-700">{crop.name}</li>
+                                    ))}
+                                </ul>
+                            </div>
+                        )}
+
+                        {weatherData && suitableCrops.length === 0 && (
+                            <p className="text-center text-red-600 mt-4">No suitable crops found for the current weather conditions.</p>
+                        )}
+                    </div>
+                </div>
+            );
+        }
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<WeatherApp />);
+    </script>
+
+    <!-- Django data for districts -->
+    {% for district in districts %}
+        <div data-district="{{ district.name }}" style="display:none;"></div>
+    {% endfor %}
+</body>
+</html>
